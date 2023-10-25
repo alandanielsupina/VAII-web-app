@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#navJedlo {
+    padding-right: 10px;
+}
+
+.ownInputs {
+    height: 2em;
+}
+
+.ownSubmits {
+    border: 1px solid black;
+    cursor: pointer;
+    padding: 1px;
+}
+.ownSubmits:hover {
+    background: blue;
+    color: white;
+}
