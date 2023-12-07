@@ -60,7 +60,9 @@ Route::get('/new_all_services', function(){
 Route::get('/new_services/create', [ServiceController::class, 'create'])->name('new_services.create');
 Route::post('/new_services', [ServiceController::class, 'store'])->name('new_services.store');
 Route::get('/new_services/{id}/edit', [ServiceController::class, 'edit'])->name('new_services.edit');
-
+//TODO: pridať do formulára povolenie meótd put a delete pre tieto cesty
+Route::post('/new_services/put/{id}', [ServiceController::class, 'update'])->name('new_services.update');
+Route::post('/new_services/delete/{id}', [ServiceController::class, 'destroy'])->name('new_services.destroy');
 
 ////////
 

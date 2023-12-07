@@ -35,7 +35,7 @@
             </form>
             <form action="{{ route('new_services.destroy', $service->id) }}" method="POST">
                 @csrf
-                <button type="button" class="btn btn-danger">Odstrániť službu</button>
+                <button type="submit" class="btn btn-danger mt-3">Odstrániť službu</button>
             </form>
         </div>
     </div>
