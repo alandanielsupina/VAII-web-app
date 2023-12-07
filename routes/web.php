@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
 use App\Models\Food;
+use App\Models\Service;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,10 +43,6 @@ Route::get('/new_choosing_city', function(){
     return view('new_choosing_city');
 })->name('new_choosing_city');
 
-Route::get('/new_city_zilina', function(){
-    return view('new_city_zilina');
-})->name('new_city_zilina');
-
 Route::get('/new_for_firms', function(){
     return view('new_for_firms');
 })->name('new_for_firms');
@@ -52,6 +50,17 @@ Route::get('/new_for_firms', function(){
 Route::get('/new_information', function(){
     return view('new_information');
 })->name('new_information');
+
+//// pre checkpoint2
+Route::get('/new_all_services', function(){
+    //$services = Service::where('city_name','Žilina')->get();
+    $services = Service::all();
+    return view('new_all_services', ['services' => $services]);
+})->name('new_all_services');
+Route::get('/new_services/create', [ServiceController::class, 'create'])->name('new_services.create');
+Route::post('/new_services', [ServiceController::class, 'store'])->name('new_services.store');
+Route::get('/new_services/{id}/edit', [ServiceController::class, 'edit'])->name('new_services.edit');
+
 
 ////////
 

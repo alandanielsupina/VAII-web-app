@@ -9,7 +9,8 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="{{ route('new_city_zilina') }}" class="nav-link px-2 link-dark">Žilina</a></li>
+                <li><a href="{{ route('new_all_services') }}" class="nav-link px-2 link-dark">Všetky služby</a></li>
+                <li><a href="{{ route('new_services.create') }}" class="nav-link px-2 link-dark">Vytvoriť službu</a></li>
                 <li><a href="#" class="nav-link px-2 link-dark">Rezervovať</a></li>
                 <li><a href="{{ route('new_for_firms') }}" class="nav-link px-2 link-dark">Pre firmy</a></li>
                 <li><a href="{{ route('new_information') }}" class="nav-link px-2 link-dark">Informácie</a></li>
