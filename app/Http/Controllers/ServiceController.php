@@ -20,6 +20,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
+        //TODO: tu nemusím posielať ['successOnCreate' => true], lebo v šablóne sa pýtam, že if isset
         return view('new_create_service');
     }
 
@@ -35,7 +36,7 @@ class ServiceController extends Controller
         ]);
         Service::create($request->all());
 
-        return redirect()->route('new_services.create');
+        return redirect()->route('new_services.create')->withSuccess('Nová služba bola vytvorená!');
     }
 
     /**

@@ -17,6 +17,11 @@
     <div class="row">
         <div class="col-6 offset-3">
             <h2 class="text-center mb-4">Vytvorenie novej služby</h2>
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success" role="alert">
+            {{ session('success') }}
+            </div>
+            @endif
             <form method="post" action="{{ route('new_services.store') }}">
                 @csrf
                 <div class="form-group mb-3">
