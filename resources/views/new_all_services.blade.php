@@ -80,7 +80,7 @@
                     @endphp
                     <a href="{{ route('new_services.edit', $service->id) }}" class="service-link {{ $serviceWithoutSpaces }}">
                         <div class="one-firm mb-4">
-                            <div class="container-one-firm">
+                            <div class="container-one-firm-card">
                                 <div class="row">
                                     <div class="col">
                                         <h4>{{ $service->name }}</h4>

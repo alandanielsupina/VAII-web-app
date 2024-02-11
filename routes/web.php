@@ -19,15 +19,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $services = Service::all();
+    return view('welcome', ['services' => $services]);
 });
 
 Route::get('/food', function(){
     $food = Food::all();
     return view('food', ['food' => $food]);
-})->name('food');
+})->middleware(['auth', 'verified'])->name('food');
 
-Route::post('/food', [FoodController::class, 'create'])->name('food.create');
+Route::post('/food', [FoodController::class, 'create'])->middleware(['auth', 'verified'])->name('food.create');
 
 
 //////// pre chechpoint1
@@ -57,13 +58,19 @@ Route::get('/new_all_services', function(){
     $services = Service::all();
     return view('new_all_services', ['services' => $services]);
 })->name('new_all_services');
+
 Route::get('/new_services/create', [ServiceController::class, 'create'])->name('new_services.create');
-Route::post('/new_services', [ServiceController::class, 'store'])->name('new_services.store');
+//Stary sposob bez AJAX:
+//Route::post('/new_services', [ServiceController::class, 'store'])->name('new_services.store');
+
+//AJAX
+Route::post('/new_services', [ServiceController::class, 'storeAJAX'])->name('new_services.ajax.store');
+///
 Route::get('/new_services/{id}/edit', [ServiceController::class, 'edit'])->name('new_services.edit');
 //TODO: pridať do formulára povolenie meótd put a delete pre tieto cesty
 Route::post('/new_services/put/{id}', [ServiceController::class, 'update'])->name('new_services.update');
 Route::post('/new_services/delete/{id}', [ServiceController::class, 'destroy'])->name('new_services.destroy');
-
+Route::get('/new_services/page/{page}', [ServiceController::class, 'getServicesByPage'])->name('new_services.getServicesByPage');
 ////////
 
 Route::get('/dashboard', function () {

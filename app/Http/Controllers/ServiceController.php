@@ -20,7 +20,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
-        //TODO: tu nemusím posielať ['successOnCreate' => true], lebo v šablóne sa pýtam, že if isset
+        //TODO: toto je viacej oznam ako todo. tu nemusím posielať ['successOnCreate' => true], lebo v šablóne sa pýtam, že if isset
         return view('new_create_service');
     }
 
@@ -30,13 +30,28 @@ class ServiceController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required', 
+            'name' => 'required',
             'company_name' => 'required',
             'city_name' => 'required',
         ]);
         Service::create($request->all());
 
         return redirect()->route('new_services.create')->withSuccess('Nová služba bola vytvorená!');
+    }
+
+    /**
+     * Store a newly created resource in storage by AJAX.
+     */
+    public function storeAJAX(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'company_name' => 'required',
+            'city_name' => 'required',
+        ]);
+        Service::create($request->all());
+
+        return response()->json(['message' => 'Nová služba bola vytvorená!']);
     }
 
     /**
@@ -64,7 +79,7 @@ class ServiceController extends Controller
         $service = Service::find($id);
 
         $this->validate($request, [
-            'name' => 'required', 
+            'name' => 'required',
             'company_name' => 'required',
             'city_name' => 'required',
         ]);
@@ -82,6 +97,16 @@ class ServiceController extends Controller
         $service->delete();
 
         return redirect()->route('new_all_services');
+    }
 
+    public function getServicesByPage($page)
+    {
+        $perPage = 3; // počet položiek na stránku
+        $services = Service::orderBy('created_at', 'asc')
+            ->skip(($page - 1) * $perPage)
+            ->take($perPage)
+            ->get();
+
+        return response()->json($services);
     }
 }
