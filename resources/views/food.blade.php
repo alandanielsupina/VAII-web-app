@@ -7,7 +7,7 @@
 
     <div class="flex py-12">
         <div class="max-w-7xl mx-auto px-6">
-            <form method="post" action="{{ route('food.create') }}">
+            <form method="post" action="{{ route('food.create') }}" enctype="multipart/form-data">
                 @csrf
                 <label>Názov jedla</label>
                 </br>
@@ -19,6 +19,9 @@
                 <input type="number" step="0.01" name="price" id="price" class="ownInputs">
                 </br>
                 </br>
+                <input type="file" name="image" id="image" class="ownInputs">
+                </br>
+                </br>
                 <input type="submit" value="Odoslať" class="ownSubmits">
             </form>
         
@@ -28,6 +31,10 @@
             @foreach( $food as $oneFood )
             {{ $oneFood->name }}
             {{ $oneFood->price }}
+            {{-- if pretoze najskor som nemal dostupne obrazky --}}
+            @if(isset($oneFood->image))
+                <img src="{{ $oneFood->image }}" alt="" style="width: 70px; height: 100px;">
+            @endif
             </br>
             @endforeach
             @endif

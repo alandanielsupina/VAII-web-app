@@ -12,6 +12,28 @@ window.$ = jQuery;
 
 Alpine.start();
 
+//TODO: toto tu oficialne ma byt odkomentovane, ale nedari sa mi volat tieto 2 funkcie z Blade sablon
+// function filterDivs(className) {
+//     alert("ahooj2");
+//     let links = document.querySelectorAll('#servicesContainer  > a.service-link');
+//     links.forEach(link => {
+//         link.style.display = 'none';
+//     });
+
+//     let filteredLinks = document.querySelectorAll(`#servicesContainer > a.${className}`);
+//     filteredLinks.forEach(link => {
+//         link.style.display = 'block';
+//     });
+// }
+
+// function showAll() {
+//     alert("ahooj");
+//     let links = document.querySelectorAll('#servicesContainer > a.service-link');
+//     links.forEach(link => {
+//         link.style.display = 'block';
+//     });
+// }
+
 var currentPage = 1;
 var backToFirstPage = document.getElementById("backToFirstPage");
 var loadLessButton = document.getElementById("loadLessButton");
@@ -72,14 +94,8 @@ function loadInitialPage() {
             } else {
                 var response = JSON.parse(xhr.responseText);
                 response.forEach(function (service) {
-                    // var serviceElement = document.createElement("div");
-                    // serviceElement.textContent = service.company_name;
-                    // servicesContainer.appendChild(serviceElement);
-
-
-
-                var serviceLink = createServiceLink(service);
-                servicesContainer.appendChild(serviceLink);  
+                    var serviceLink = createServiceLink(service);
+                    servicesContainer.appendChild(serviceLink);  
                 });
             }
         } else if (xhr.readyState == 4 && xhr.status != 200) {
@@ -104,10 +120,6 @@ backToFirstPage.addEventListener("click", function () {
             viewPaginationNumber.innerHTML = currentPage;
             var response = JSON.parse(xhr.responseText);
             response.forEach(function (service) {
-                // var serviceElement = document.createElement("div");
-                // serviceElement.textContent = service.company_name;
-                // servicesContainer.appendChild(serviceElement);
-
                 var serviceLink = createServiceLink(service);
                 servicesContainer.appendChild(serviceLink); 
             });
@@ -135,10 +147,6 @@ loadLessButton.addEventListener("click", function () {
                     viewPaginationNumber.innerHTML = currentPage;
                     var response = JSON.parse(xhr.responseText);
                     response.forEach(function (service) {
-                        // var serviceElement = document.createElement("div");
-                        // serviceElement.textContent = service.company_name;
-                        // servicesContainer.appendChild(serviceElement);
-
                         var serviceLink = createServiceLink(service);
                         servicesContainer.appendChild(serviceLink); 
                     });
@@ -165,10 +173,6 @@ loadMoreButton.addEventListener("click", function () {
                 viewPaginationNumber.innerHTML = currentPage;
                 var response = JSON.parse(xhr.responseText);
                 response.forEach(function (service) {
-                    // var serviceElement = document.createElement("div");
-                    // serviceElement.textContent = service.company_name;
-                    // servicesContainer.appendChild(serviceElement);
-
                     var serviceLink = createServiceLink(service);
                     servicesContainer.appendChild(serviceLink); 
                 });

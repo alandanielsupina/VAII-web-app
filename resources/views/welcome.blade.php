@@ -607,7 +607,39 @@
         </div>
     </div>
 
-    <div class="mt-10">
+    {{--TODO: pridať spacing medzi jednotlivými buttons. Myslieť na to, že musí fungovať akoboty ten flex-wrao --}}
+    <div class="filter-buttons mt-10 flex justify-center items-center">
+        <div class="text-center">
+            @php
+            $tempArray = [];
+            $arrayWithoutDuplicities = [];
+
+            foreach ($services as $val) {
+            if (!in_array($val['city_name'], $tempArray)) {
+            $tempArray[] = $val['city_name'];
+            $arrayWithoutDuplicities[] = $val;
+            }
+            }
+
+            @endphp
+            @if(isset($services) && isset($arrayWithoutDuplicities))
+            @foreach( $arrayWithoutDuplicities as $serviceWithoutDuplicities )
+            @php
+            $serviceWithoutSpaces = str_replace(' ', '', $serviceWithoutDuplicities->city_name);
+            @endphp
+            <button
+                class="inline-block rounded bg-sky-600 px-8 py-3 text-sm font-medium text-white transition hover:bg-sky-400 hover:shadow-xl focus:outline-none  active:bg-sky-400"
+                onclick="filterDivs('{{ $serviceWithoutSpaces }}')">{{
+                $serviceWithoutDuplicities->city_name }}</button>
+            @endforeach
+            <button
+                class="inline-block rounded bg-sky-600 px-8 py-3 text-sm font-medium text-white transition hover:bg-sky-400 hover:shadow-xl focus:outline-none  active:bg-sky-400"
+                onclick="showAll()">Zobraziť všetky</button>
+            @endif
+        </div>
+    </div>
+
+    <div class="mt-5">
         <div class="max-w-7xl mx-auto px-2">
             <div class="filterable-divs flex justify-center text-2xl">
                 <div id="servicesContainer" class="w-full lg:w-3/4">
@@ -642,18 +674,43 @@
     <div id="servicesContainer"></div>
 
     <div class="flex justify-center items-center mb-5">
-        <button id="backToFirstPage" class="bg-sky-600 text-white py-2 px-4 rounded-l-lg hover:bg-sky-400 focus:outline-none focus:bg-sky-400">
+        <button id="backToFirstPage"
+            class="bg-sky-600 text-white py-2 px-4 rounded-l-lg hover:bg-sky-400 focus:outline-none focus:bg-sky-400">
             Späť na 1
         </button>
-        <button id="loadLessButton" class="bg-sky-600 text-white py-2 px-4 hover:bg-sky-400 focus:outline-none focus:bg-sky-400">
-            <
-        </button>
-        <span id="servicesPaginationNumber" class="bg-sky-600 text-white py-2 px-4">
-            1
-        </span>
-        <button id="loadMoreButton" class="bg-sky-600 text-white py-2 px-4 rounded-r-lg hover:bg-sky-400 focus:outline-none focus:bg-sky-400">
-            >
-        </button>
+        <button id="loadLessButton"
+            class="bg-sky-600 text-white py-2 px-4 hover:bg-sky-400 focus:outline-none focus:bg-sky-400">
+            < </button>
+                <span id="servicesPaginationNumber" class="bg-sky-600 text-white py-2 px-4">
+                    1
+                </span>
+                <button id="loadMoreButton"
+                    class="bg-sky-600 text-white py-2 px-4 rounded-r-lg hover:bg-sky-400 focus:outline-none focus:bg-sky-400">
+                    >
+                </button>
     </div>
+
+<script>
+function showAll() {
+    alert("ahooj");
+    let links = document.querySelectorAll('#servicesContainer > a.service-link');
+    links.forEach(link => {
+        link.style.display = 'block';
+    });
+}
+
+function filterDivs(className) {
+    alert("ahooj2");
+    let links = document.querySelectorAll('#servicesContainer  > a.service-link');
+    links.forEach(link => {
+        link.style.display = 'none';
+    });
+
+    let filteredLinks = document.querySelectorAll(`#servicesContainer > a.${className}`);
+    filteredLinks.forEach(link => {
+        link.style.display = 'block';
+    });
+}
+</script>
 
 </x-app-layout>
