@@ -1,7 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Food') }}
+            {{-- {{ __('Food') }} --}}
+            Pridajte navrhované jedlé pre vaše podniky
         </h2>
     </x-slot>
 
@@ -35,6 +36,8 @@
             @if(isset($oneFood->image))
                 <img src="{{ $oneFood->image }}" alt="" style="width: 70px; height: 100px;">
             @endif
+            </br>
+            </br>
             </br>
             @endforeach
             @endif

@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="bg-sky-600 border-b border-black">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 lg:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
@@ -12,15 +12,41 @@
 
                 <!-- Navigation Links -->
                 @auth
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 lg:-my-px lg:ml-10 lg:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 lg:-my-px lg:ml-10 lg:flex">
                     <x-nav-link :href="route('food')" :active="request()->routeIs('food')">
-                        {{ __('Food') }}
+                        {{-- {{ __('Food') }} --}}
+                        Navrhnované jedlo
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 lg:-my-px lg:ml-10 lg:flex">
+                    <x-nav-link :href="route('new_all_companies')" :active="request()->routeIs('new_all_companies')">
+                        {{-- {{ __('All companies') }} --}}
+                        Všetky podniky
+                    </x-nav-link>
+                </div>
+                
+                <div class="hidden space-x-8 lg:-my-px lg:ml-10 lg:flex">
+                    <x-nav-link :href="route('new_companies.create')" :active="request()->routeIs('new_companies.create')">
+                        Vytvoriť podnik
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 lg:-my-px lg:ml-10 lg:flex">
+                    <x-nav-link :href="route('new_all_workers')" :active="request()->routeIs('new_all_workers')">
+                        Všetci pracovníci
+                    </x-nav-link>
+                </div>
+                
+                <div class="hidden space-x-8 lg:-my-px lg:ml-10 lg:flex">
+                    <x-nav-link :href="route('new_workers.create')" :active="request()->routeIs('new_workers.create')">
+                        Vytvoriť pracovníka
                     </x-nav-link>
                 </div>
                 @else
@@ -31,13 +57,13 @@
             @guest
             <div class="flex">
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 lg:-my-px lg:ml-10 lg:flex">
                     <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                         {{ __('Login') }}
                     </x-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-8 lg:-my-px lg:ml-10 lg:flex">
                     <x-nav-link :href="route('register')" :active="request()->routeIs('login')">
                         {{ __('Sing up') }}
                     </x-nav-link>
@@ -49,7 +75,7 @@
 
             <!-- Settings Dropdown -->
             @auth
-            <div class="hidden sm:flex sm:items-center sm:ml-6">
+            <div class="hidden lg:flex lg:items-center lg:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
@@ -73,7 +99,26 @@
                         </x-dropdown-link>
 
                         <x-dropdown-link :href="route('food')">
-                            {{ __('Food') }}
+                            {{-- {{ __('Food') }} --}}
+                            Navrhnované jedlo
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('new_all_companies')">
+                            {{-- {{ __('All companies') }} --}}
+                            Všetky podniky
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('new_companies.create')">
+                            Vytvoriť podnik
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('new_all_workers')">
+                            {{-- {{ __('All companies') }} --}}
+                            Všetci pracovníci
+                        </x-dropdown-link>
+
+                        <x-dropdown-link :href="route('new_workers.create')">
+                            Vytvoriť pracovníka
                         </x-dropdown-link>
 
                         <!-- Authentication -->
@@ -91,7 +136,7 @@
             @endauth
 
             <!-- Hamburger -->
-            <div class="-mr-2 flex items-center sm:hidden">
+            <div class="-mr-2 flex items-center lg:hidden">
                 <button @click="open = ! open"
                     class="inline-flex items-center justify-center p-2 rounded-md text-white hover:text-white hover:bg-sky-500 focus:outline-none focus:bg-sky-500 focus:text-white transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -108,7 +153,7 @@
 
     <!-- toto menu sa zobrazi na telefone (nie na vacsej obrazovke) -->
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden lg:hidden">
         @auth
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -119,7 +164,36 @@
         <!-- hento :active= by malo spravit to, ze zostane zvyraznene Food v menu, pokial budeme na Food podstranke -->
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('food')" :active="request()->routeIs('food')">
-                {{ __('Food') }}
+                {{-- {{ __('Food') }} --}}
+                Navrhnované jedlo
+            </x-responsive-nav-link>
+        </div>
+        
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('new_all_companies')" :active="request()->routeIs('new_all_companies')">
+                {{-- {{ __('All companies') }} --}}
+                Všetky podniky
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('new_companies.create')" :active="request()->routeIs('new_companies.create')">
+                Vytvoriť podnik
+            </x-responsive-nav-link>
+        </div>
+
+        
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('new_all_workers')" :active="request()->routeIs('new_all_workers')">
+                {{-- {{ __('All companies') }} --}}
+                Všetci pracovníci
+            </x-responsive-nav-link>
+        </div>
+
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('new_workers.create')" :active="request()->routeIs('new_workers.create')">
+                Vytvoriť pracovníka
             </x-responsive-nav-link>
         </div>
 
@@ -136,7 +210,25 @@
                 </x-responsive-nav-link>
 
                 <x-responsive-nav-link :href="route('food')">
-                    {{ __('Food') }}
+                    {{-- {{ __('Food') }} --}}
+                    Navrhnované jedlo
+                </x-responsive-nav-link>
+
+                <x-responsive-nav-link :href="route('new_all_companies')">
+                    {{-- {{ __('Food') }} --}}
+                    Všetky podniky
+                </x-responsive-nav-link>
+                
+                <x-responsive-nav-link :href="route('new_companies.create')">
+                    Vytvoriť podnik
+                </x-responsive-nav-link>
+                
+                <x-responsive-nav-link :href="route('new_all_workers')">
+                    Všetci pracovníci
+                </x-responsive-nav-link>
+                
+                <x-responsive-nav-link :href="route('new_workers.create')">
+                    Vytvoriť pracovníka
                 </x-responsive-nav-link>
 
                 <!-- Authentication -->

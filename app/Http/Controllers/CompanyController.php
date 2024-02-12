@@ -35,7 +35,7 @@ class CompanyController extends Controller
             'city' => 'required',
             'category' => 'required',
             'address' => 'required',
-            'image' => 'required|mimes:png,jpg,jpeg',
+            'image' => 'mimes:png,jpg,jpeg',
         ]);
 
         if ($request->has('image')) {
@@ -59,7 +59,7 @@ class CompanyController extends Controller
         //Auth::user()->companies()->create( $request->all() );
         // Service::create($request->all());
 
-        return redirect()->route('new_companies.create')->withSuccess('Nová služba bola vytvorená!');
+        return redirect()->route('new_companies.create')->withSuccess('Nový podnik bol vytvorený!');
     }
 
     /**
@@ -92,7 +92,7 @@ class CompanyController extends Controller
             'city' => 'required',
             'category' => 'required',
             'address' => 'required',
-            'image' => 'required|mimes:png,jpg,jpeg',
+            'image' => 'mimes:png,jpg,jpeg',
         ]);
 
         if ($request->has('image')) {
@@ -106,17 +106,24 @@ class CompanyController extends Controller
             if (File::exists($company->image)) {
                 File::delete($company->image);
             }
+
+            $company->update([
+                'name' => $request->name,
+                'city' => $request->city,
+                'category' => $request->category,
+                'address' => $request->address,
+                'image' => $path.$fileName
+            ]);
+        } else {
+            $company->update([
+                'name' => $request->name,
+                'city' => $request->city,
+                'category' => $request->category,
+                'address' => $request->address
+            ]);
         }
 
-        $company->update([
-            'name' => $request->name,
-            'city' => $request->city,
-            'category' => $request->category,
-            'address' => $request->address,
-            'image' => $path.$fileName
-        ]);
-
-        return redirect()->route('new_company.edit', $company->id);
+        return redirect()->route('new_companies.edit', $company->id)->withSuccess('Podnik bol aktualizovaný!');
     }
 
     /**
