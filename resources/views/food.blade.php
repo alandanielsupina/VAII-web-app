@@ -28,8 +28,8 @@
         
             </br>
             <h1 style="color: blue; font-weight: bold;;">Všetky jedlá</h1>
-            @if(isset($food))
-            @foreach( $food as $oneFood )
+            
+            @forelse ($food as $oneFood)
             {{ $oneFood->name }}
             {{ $oneFood->price }}
             {{-- if pretoze najskor som nemal dostupne obrazky --}}
@@ -39,8 +39,9 @@
             </br>
             </br>
             </br>
-            @endforeach
-            @endif
+            @empty
+                <h1 style="color: red; font-weight: bold;">Žiadne dostupné jedlá</h1>
+            @endforelse
         </div>
     </div>
 </x-app-layout>
